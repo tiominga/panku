@@ -1,0 +1,79 @@
+<html>
+
+
+      <head>
+         <script>
+         
+                        var droppedIn = false;
+                        
+                        
+                        
+                        
+                        //iniciar a arrastar
+                        function drag_start(event) 
+                        {  
+                           
+                            /*qual cursor (teoricamente pode ser copy,link,none e move mas não vi diferença*/
+                            event.dataTransfer.dropEffect = "none";
+                            
+                            /*passa um valor, no caso é como se passasse que valor é o id, mas podia ser um número por exemplo*/  
+                            event.dataTransfer.setData("valor", event.target.getAttribute('id') ); 
+                          
+                        }
+                        
+                        function drag_enter(event) 
+                        {
+                       /*ao passar por cima do elemento destino*/ 
+                       document.getElementById('status').value="Entrou";
+                         
+                        }
+                        
+                        function drag_drop(event)  
+                        {
+                        
+                        /*ao largar o componente encima do destino*/
+                            event.preventDefault(); /* Previne comportamentos estranhos, anulando o comportamento normal de um elemento na página, pois terá outro */
+                            var elem_id = event.dataTransfer.getData("valor"); /*joga na variável o valor do componente origem*/ 
+                            
+                            event.target.appendChild( document.getElementById(elem_id) ); /*define que a camada arrastada faz parte do elemento (é filha) da camada alva, ficando dentro dela */                          
+                            
+                            document.getElementById(elem_id).removeAttribute("draggable"); /*retira o atributo de dragable para não poder tirar o filho do pai*/
+                            document.getElementById(elem_id).style.cursor = "copy"; /*muda o cursor para copy*/ 
+                            droppedIn = true;
+                            document.getElementById('status').value="Terminou";
+                                                }
+                        
+                        
+                        function drag_end(event) 
+                        {
+                            if(droppedIn == false)
+                            {
+                                document.getElementById('status').value="Terminou";
+                            }
+                        	droppedIn = false;
+                        }
+                                                
+ 
+         
+         
+         
+         
+         </script>
+      
+      </head>
+      
+      <body id="all" >
+            <input type="text" id="status" value="oi mame"></input>
+            
+            
+            <div id="drop_zone" style="position:absolute; width :25%; height: 25%;top:50%;background-color:blue" ondragenter="drag_enter(event)" ondrop="drag_drop(event)" ondragover="return false" ondragleave="drag_leave(event)" ></div>
+            
+            <div id="object3" style="position: absolute; width:25%; height:25%; background-color:red" draggable="true" ondragstart="drag_start(event)" ondragend="drag_end(event)">object 3</div>
+      
+      
+      </body>
+
+
+
+
+</html>

@@ -1,0 +1,132 @@
+
+
+input[type=text],
+input[type=url],
+input[type=tel],
+input[type=number],
+input[type=color],
+input[type=email],
+input[type=password]
+{
+display: block;
+font-family: Ubuntu, Arial, sans-serif;
+border-style: solid;
+border-width: 1px;
+border-color: #dedede;
+margin-bottom: 0px;
+font-size: 1.5vw;
+padding: 6px 12px;
+padding-left: 2px;
+width: 97%;
+height:97%;
+color: #777;
+box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
+-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
+-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
+transition: border 0.15s linear 0s, box-shadow 0.15s linear 0s, color 0.15s linear 0s;
+-webkit-transition: border 0.15s linear 0s, box-shadow 0.15s linear 0s, color 0.15s linear 0s;
+-moz-transition: border 0.15s linear 0s, box-shadow 0.15s linear 0s, color 0.15s linear 0s;
+-o-transition: border 0.15s linear 0s, box-shadow 0.15s linear 0s, color 0.15s linear 0s;
+}
+
+select
+{
+
+
+    /* Size and position */
+    position: relative; /* Enable absolute positioning for children and pseudo elements */
+    width: 90%;
+    height:90%;
+    padding: 0%;
+    margin: 0.5 auto;
+
+    /* Styles */
+    background: #F2F2F3;
+    color: #37474F;
+    outline: none;
+    cursor: pointer;
+
+    /* Font settings */
+    font-weight: bold;
+
+    /*background: url(images/combo2.png) no-repeat right;
+    background-size: 15px,10px;*/
+
+}
+
+.grid_left
+{
+
+    background-color:silver;
+    border: 0.5px solid;
+    width:100%;
+    height:4%;
+    left:0%;
+    cursor:pointer;
+    position:absolute;
+
+
+}
+
+.font_p
+{
+font-family: Arial, Verdana;
+text-shadow: 0.2px 0.2px 0.2px #000000;
+font-size: 1vw;
+color: #37474F;
+}
+
+
+
+
+.font_m
+{
+font-family: ubuntu, Arial;
+font-size: 1vw;
+color: #000000;
+}
+
+
+.font_g
+{
+font-family: Arial, Verdana;
+text-shadow: 0.2px 0.2px 0.2px #000000;
+font-size: 2.0vw;
+color: #37474F;
+}
+
+
+.font_gg
+{
+font-family: ubuntu,Arial, Verdana;
+text-shadow: 0.0px 0.0px 0.0px #000000;
+font-size: 3vw;
+color: #37474F;
+}
+
+
+
+
+.button:hover {
+    box-shadow: inset 0 2px 5px #fff, 0 2px 3px #666;
+    }
+    
+    
+    .button:active {
+    box-shadow: inset 0 2px 5px #fff, 0 1px 3px #666 !important;
+    top:2px
+    }
+    
+    
+    
+    .button
+    {
+    border:1px solid #25692A;
+    border-radius:4px;
+    display:inline-block;
+    cursor:pointer;
+    font-family:Verdana;
+    font-size:0.7vw;
+    padding:6px 10px;
+    text-decoration:none;
+    }
