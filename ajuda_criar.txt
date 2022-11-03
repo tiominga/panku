@@ -1,0 +1,23 @@
+Ajuda do panku:
+
+
+1-Criar MENU
+    *No panku.js colocar o novo menu (procura por .png e adiciona)
+    *Repara que no onclick dele você vai ter que colocar uma função que começa com function left_xxxxxx 
+
+2-Criar SubMenu
+    *Ainda no panku.js, procure pela área com funções que começem com left_ e adicione esta  nova função e SubMenu
+    *Todas as funções left_xxxxx vão chamar a função (ainda no panku.js) editor_pass(\'@form_xxxx@;'+table+'\',1,1,1,0);" 
+
+3-editor_pass
+    *Caso no passo 2 o comando seja para executar algo e não apenas para passar um texto para o editor, a função query_exec(); (ainda no panku.js) 
+    vai direcionar o comando criado para o arquivo dbtools.class.php 
+    *No dbtools.class.php em SetQueryType você precisa colocar no array a nova função com o número dela
+    *No php_tools.php o número xxx criado no campo acima vira o if ($show_result == xxxx) e um type=x 
+    *Repara que no fim do php_tools.php ele pega o resultado do ítem acima e executa a função js php_tool( ) , que está no panku.js.
+    Esta função usa um array com todos os campos da tabela, permitindo a criação de qualquer coisa que precise destes campos.
+
+    
+    
+    
+

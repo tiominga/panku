@@ -1,0 +1,36 @@
+
+<xmp>
+<!-- #########################Add this code in index.php file, on body #################################### -->
+<div id="dvMain_@table_name@" class="window_main" style="width:50%; height:70%; left:25%;top:5%">
+
+    <!--Window title bar -->  
+    <div id="dvBar_@table_name@" class="window_bar" style="position:absolute;height:4%"  draggable="true" onCLick="window_to_front(this.id);"  ondragstart="window_move(event);"> 
+
+        <font class="font_title_window">@window_title@</font>
+
+        <!--Close button-->   
+        <div  ONCLICK=div_close('dvMain_@table_name@'); class="window_bar_close">   
+                <div style="left:40%; top:25%; position:absolute"><font class="font_button_close">X</font></div>
+        </div>
+
+        <!--add button -->
+        <div  class="button_bar" onClick="form_reset('form_@table_name@');" style="position:absolute;background-image: url('images/add.png'); left:80%;width:3%"></div>
+    
+        <!--save button -->
+        <div  class="button_bar" onClick="form_submit('form_@table_name@');" style="position:absolute;background-image: url('images/save.png'); left:85%;width:3%"> </div>
+    
+        <!--delete button -->
+        <div  class="button_bar" onClick="alert('add this function on @table_name@ object');" style="position:absolute;background-image: url('images/del.png'); left:90%;width:3%"> </div>
+
+    </div>
+
+    <!--window core -->   
+    <div id="dvCore_@table_name@" class="window_core" style="top:4%;width:100%;height:89%;left:0%">
+
+        <!-- ######################### the function div_show_core in /includes/main.js will open the file @table_name@.php in this core. Add the div_show_core('@table_name@') function on the menu in menu_model.html #########################--> 
+
+    </div>
+
+                                                                
+</div>
+</xmp>

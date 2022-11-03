@@ -1,0 +1,6 @@
+Choose;database;host;port;user;password(do not input password hear if is not in localhost PLEASE)<br>
+mysql;mysql;127.0.0.1;3306;root;2005@Miguel70252<br>
+InfoVet;infovet;127.0.0.1;3306;root;2005@Miguel70252<br>
+Streda01;streda01;mysql.veterinaria.com.br;3306;streda01;262002<br>
+Veterinaria;veterinaria;127.0.0.1;3306;root;2005@Miguel70252<br>
+

@@ -57,13 +57,14 @@ select
 .grid_left
 {
 
+    position:absolute;
     background-color:silver;
     border: 0.5px solid;
     width:100%;
     height:4%;
     left:0%;
     cursor:pointer;
-    position:absolute;
+    
 
 
 }
@@ -129,4 +130,15 @@ color: #37474F;
     font-size:0.7vw;
     padding:6px 10px;
     text-decoration:none;
+    }
+
+    .text-light
+    {
+
+        font-family: ubuntu, Arial;
+        font-size: 1vw;
+        color: #698bca; 
+
+
+
     }

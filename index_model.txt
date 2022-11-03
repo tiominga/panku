@@ -1,0 +1,62 @@
+<xmp>
+ <!-- #########################Save this file in a project folder. This is the index.php#################################### -->
+    <html> 
+
+    <head>
+
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+        <link  href="includes/main.css?version=1" rel="stylesheet" type="text/css">
+        <link  href="includes/main_menu.css?version=1" rel="stylesheet" type="text/css">
+                     
+        <html lang="pt-br">
+
+        <title>@project_title@</title>
+
+        <script type="text/javascript" src="includes/main.js"></script>
+
+    </head>
+
+    <body>
+
+         <div style="position:absolute; top:0%;width:25%;height:25%;left:75%;display:none">
+        
+            <iframe id="iframe_aux" name="iframe_aux" marginHeight="0" marginWidth="0" scrolling="no" width="100%" height="100%">
+                                                                    
+            </iframe>
+
+        </div>   
+
+
+        <div id="main_menu_bar" class="main_menu_bar">
+
+            <?php include_once("includes/main_menu.html"); ?>
+
+        </div>
+
+        <div id="dv_show_messageb";  style="position:absolute;background-color:#8F8F8F; width:15%; height:15%; left:84.5%; top:85%;  display:none; z-index:100  ">
+
+          <div ONCLICK=div_close('dv_show_messageb'); style="position:absolute;background-color:#8F8F8F; width:2%; height:5%; left:96.5%; top:0%;cursor:pointer;  z-index:11">
+                <font class="font_button_close">X</font>
+          </div>
+
+          <div style="position: absolute;background-color:#5F5F5F; left:0%; top:15%;width:100%; height:85%; z-index:11 ">
+
+                  <text  class="font_m" id="show_menssage_menssage" >
+
+                  </text>
+
+          </div>
+
+        </div> 
+
+
+
+      <!-- add windows on her -->
+
+    </body>    
+
+</html>
+
+ 
+</xmp>

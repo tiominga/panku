@@ -10,14 +10,6 @@ error_reporting(E_ALL);
 
     $ok=0;
 
-    
-
-   
-
-
-    
-
-
     $host = $_POST["host"];
     $user = $_POST["user"];
     $password = $_POST["password"];
@@ -26,19 +18,21 @@ error_reporting(E_ALL);
     $query = $_POST["query"];
     $object_php = $_POST["object_php"];
 
+    $query = htmlentities($query);
+
     
-    $query = str_replace("\n", ' ', "$query");
-    $query = str_replace("\r", ' ', "$query");   
-    $query = str_replace('"',"'",$query);
-    $query = str_replace("� ", " ",$query);
-    $query = str_replace("  ", " ",$query);
-    $query = str_replace("   "," ",$query);
+
     $query=trim($query); 
+    $query = str_replace("\n"," ","$query");
+    $query = str_replace("\r"," ", "$query");   
+    $query = str_replace('"',"'",$query);
+    $query = str_replace("� ","",$query);
+    $query = str_replace("&nbsp;"," ",$query);
+    //$query=trim(preg_replace('/\s+/','',$query));
+    $query=preg_replace("/\s+/", " ",$query);  
+    $query=html_entity_decode($query);  
 
-    
 
-    
-   
     $obj_dbtools = new DBtools();
 
     $obj_dbtools -> getInformation($query,$db,$host,$port,$user,$password);
@@ -46,6 +40,8 @@ error_reporting(E_ALL);
     $column_count = $obj_dbtools -> getN_columns();
 
     $table_name=$obj_dbtools -> getTableName("$query"); 
+
+    $answer = $obj_dbtools -> getAnswer(); 
 
     $key = $obj_dbtools -> getKey();
         
@@ -56,59 +52,48 @@ error_reporting(E_ALL);
     $res = $obj_dbtools -> getRes();
 
     $error = $obj_dbtools ->getError();
+
+    $query = str_replace('"',"'",$query);
    
     if ( $error !=0 ) {
        
-        
-        echo("<script>window.parent.status(\"<font color='red' class='font_m'>$error[2]</font>\");</script>");      
+        echo("<script>window.parent.status(\"<font color='red' class='font_m'>$error[2]</font>\",0);</script>");      
      
     }
     else
     {
 
-        echo("<script>window.parent.status(\"<font color='blue' class='font_m'>$query</font>\");</script>");      
-        $ok=1;
-   
+            echo("<script>window.parent.status(\"<font color='blue' class='font_m'>$query</font>\",1);</script>"); 
+           
+                $ok=1;
 
-   
+        if ($show_result > 0)
+        {
+            
+            include_once("grid_head.php");
+            
+            if ($show_result < 100) //if is not a tool (php objects etc)
+            {
 
-    if ($show_result > 0)
-    {
-        
-        include_once("grid_head.php");
-        
+                include_once("grid_core.php");
 
+                echo("<script>connect_show_grid(\"$core\");</script>");
+            } //###################################################################################show_result < 100 TOOLS #########################################################################################
+            else //its php object
+            {
 
-        if ($show_result < 100) //if is not a tool (php objects etc)
+                include_once("php_tools.php");
+
+            }
+        }
+        else //its a new connection becouse show_result is zero
         {
 
-            
-
-            include_once("grid_core.php");
-
-            
-
-            echo("<script>connect_show_grid(\"$core\");</script>");
-        } //###################################################################################show_result < 100 TOOLS #########################################################################################
-        else //its php object
-        {
-
-            include_once("php_tools.php");
-
+            include_once("new_connection.php");
 
         }
-    }
-    else //its a new connection becouse show_result is zero
-    {
-
-        include_once("new_connection.php");
 
 
-    }
-
-
-}//else of error
-    
-
+    }//else of error
 
 ?>

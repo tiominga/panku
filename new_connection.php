@@ -9,8 +9,8 @@
 
        $tables = "";
        $top = 0;
-
-       $html_table = "<div class='table-responsive'><table class='table table-sm  table-hover table-dark'><thead><tr>"; 
+       
+       $html_table = "<table class='table table-sm table-hover table-dark'><tr>"; 
 
        while ($linha = $res -> fetch(PDO::FETCH_BOTH)) 
        {
@@ -33,7 +33,7 @@
             $top = $top + 4;
         }
 
-       $html_table .="</tr></thead><tbody>";
+       $html_table .="</tr>";
        
        echo("<script>connect_show_tables(\"$html_table\");</script>");
 ?>       
