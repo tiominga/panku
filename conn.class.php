@@ -40,7 +40,7 @@ class Connection
             
         $this->db->exec("set character set utf8");
 
-        return $this->db;
+        return $this->db; 
 
     }
 
