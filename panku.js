@@ -147,6 +147,7 @@
 
             if (type == 2){ //insert
 
+              
               line = 'insert into '+value+'(';
               line2= ' values ('; 
 
@@ -725,6 +726,18 @@
 
         }
 
+        function new_record(query){
+
+          if ( confirm('Add a new record?') ){
+
+            editor_pass(query,1,0,0,0);
+            describe_mod=0;
+
+          }
+
+
+        }
+
 
         function left_popup(table,key)
         {
@@ -762,7 +775,7 @@
                 if (key!=0){                
                   top=top+4; 
                   let query_add ='insert into '+table+' ('+key+') values (null)';                   
-                  menu=menu + '<div onclick="editor_pass(\''+query_add+'\',1,0,0,0);describe_mod=0" class=\'mt-3 mb-5\'  style=\'position:absolute;top:'+top+'%\'><a href=\'#\' class=\'alert-link\'><h6 class=\'text-light\'>Add new record</h6></a></font></div>';                  
+                  menu=menu + '<div onclick="new_record(\''+query_add+'\')" class=\'mt-3 mb-5\'  style=\'position:absolute;top:'+top+'%\'><a href=\'#\' class=\'alert-link\'><h6 class=\'text-light\'>Add new record</h6></a></font></div>';                  
                   
                  
                   }
