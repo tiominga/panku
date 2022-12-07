@@ -1,98 +1,33 @@
 <?php 
 
-//#############Save this file in folder includes with the name connection.class.php
+    //#############Save this file in folder includes with the name connection.class.php
 
-class Connection{
+    class Connection{
 
-    private $db;
-    private $host;
-    private $user;
-    private $password;
-    private $port;
-    private $database;
+        private $db;
     
-    public function __construct(){
-
-        $this -> host = "@panku_host@";
-        $this -> user = "@panku_user@";
-        $this -> password = "@panku_password@";
-        $this -> port = "@panku_port@";
-        $this -> database = "@panku_database@";     
+        try {     
         
-    }
+            $this -> db = new PDO("mysql:host=@panku_host@;port=@panku_port@;dbname=@panku_database@","@panku_user@","@panku_password@");        
+            $this->db->exec("set character set utf8");
 
-    private function setConnection(){
+        } catch(PDOException $error) {
+            
+                echo 'ERROR: ' . $error->getMessage();
+            }
+    
 
-       $db = $this -> database;
-       $host = $this -> host;
-       $user = $this -> user;
-       $password = $this -> password;
-       $port = $this -> port;
-       $database = $this -> database;
+        return $this->db;
 
-       try {     
-       
-        $this -> db = new PDO("mysql:host=$host;port=$port;dbname=$database","$user","$password");        
-        $this->db->exec("set character set utf8");
-
-       } catch(PDOException $error) {
-         
-            echo 'ERROR: ' . $error->getMessage();
         }
- 
 
-       return $this->db;
+        public function getConnection(){
 
-    }
+        return $this -> setConnection();
 
-    private function setSquery($query){
+        }
 
-        $query = str_ireplace('"null"','null',$query); 
-        $query = str_ireplace('"curdate()"','curdate()',$query); 
-        $query = str_ireplace('"curtime()"','curtime()',$query); 
-        $query = str_ireplace('""','null',$query); 
-        $query = str_ireplace('"0000-00-00"','null',$query); 
-        $query = str_ireplace(',,',',null,',$query); 
-        
-        return strip_tags($query); 
-
-    }
-
-    
-    private function setValue($table,$field,$id){
-
-        $conn = $this -> getConnection();
-
-        $res = $conn -> query("select $field as value from $table where cod_id=$id");
-        
-        while ($line = $res -> fetch(PDO::FETCH_ASSOC)){
-
-           return $line["value"]; 
-
-        }//while
-
-    }
-
-
-    public function getConnection(){
-
-       return $this -> setConnection();
-
-    }
-
-    public function getValue($table,$field,$id){
-
-        return $this -> setValue($table,$field,$id);
- 
-     }
-
-     public function squery($query){
-
-         return $this -> setSquery($query);
-
-     }
-
-}//class
+    }//class
 
 ?>
 
