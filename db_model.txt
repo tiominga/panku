@@ -5,6 +5,8 @@
     class Connection{
 
         private $db;
+
+        private function setConnection(){
     
         try {     
         
