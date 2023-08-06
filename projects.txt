@@ -1,12 +1,12 @@
 Choose;database;host;port;user;password(do not input password hear if is not in localhost PLEASE)<br>
-mysql;mysql;127.0.0.1;3306;root;2005@Miguel70252<br>
-InfoVet;infovetweb06;127.0.0.1;3306;root;2005@Miguel70252<br>
-InfoVet_CEP;infovet_cep;127.0.0.1;3306;root;2005@Miguel70252<br>
-email;email_infovetweb;127.0.0.1;3306;root;2005@Miguel70252<br>
-dentista;dentista;127.0.0.1;3306;root;2005@Miguel70252<br>
+mysql;mysql;127.0.0.1;3306;root;<br>
+InfoVet;infovetweb;127.0.0.1;3306;root;<br>
+InfoVet_CEP;infovet_cep;127.0.0.1;3306;root;<br>
+email;email_infovetweb;127.0.0.1;3306;root;<br>
+dentista;dentista;127.0.0.1;3306;root;<br>
 Streda01;streda01;mysql.veterinaria.com.br;3306;streda01;262002<br>
-Veterinaria;veterinaria;127.0.0.1;3306;root;2005@Miguel70252<br>
-simplesmenu;tiomi768_menu01;127.0.0.1;3306;tiomi768_menu01;2005@Miguel70252<br>
-under;w1772_bicho_no_capricho;177.70.23.124;3306;root;2005Miguel@70252$<br>
-SimplesMenu King;simplesmenu;mysql01-farm10.kinghost.net;3306;simplesmenu;2005Miguel70252<br>
+Veterinaria;veterinaria;127.0.0.1;3306;root;<br>
+simplesmenu;tiomi768_menu01;127.0.0.1;3306;tiomi768_menu01;<br>
+under;w1772_bicho_no_capricho;177.70.23.124;3306;root;<br>
+SimplesMenu King;simplesmenu;mysql01-farm10.kinghost.net;3306;simplesmenu;<br>
 

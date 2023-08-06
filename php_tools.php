@@ -1,284 +1,231 @@
 <?php //included in connect.php
-        
-            include_once("php_tools.js");
 
-            function file_to_model($path){
+include_once("php_tools.js");
 
-                $file = fopen ($path, 'r');
-                // read the file content
-                while(!feof($file))
-                {
+function file_to_model($path)
+{
 
-                    $line = fgets($file, 1024);
+    $file = fopen($path, 'r');
+    // read the file content
+    while (!feof($file)) {
 
-                    $have = strpos( $line, "{" );
+        $line = fgets($file, 1024);
 
-                    if ($have == false){
+        $have = strpos($line, "{");
 
-                        $have = strpos($line, "{" );
+        if ($have == false) {
 
-                    }    
+            $have = strpos($line, "{");
+        }
 
-                    if ($have == true){
+        if ($have == true) {
 
-                        $line = $line."<br>";
+            $line = $line . "<br>";
+        } else {
 
-                    }  
-                    else
-                    {  
+            $line = "&nbsp&nbsp" . $line . "<br>";
+        }
+    }
+    return $line;
+}
 
-                        $line = "&nbsp&nbsp".$line."<br>";     
+$top = 0;
+$core = "";
+$line = "";
+$general = 0;
+$type = 1;
 
-                    }
+if ($show_result == 100) //php propertyes
+{
+    $prefix = "private $";
+    $suffix = "; <br>";
+    $answer = "<br>public function __get(" . "$" . "property" . "){<br><br> &nbsp&nbsp&nbsp   return " . "$" . "this ->" . "$" . "property;<br><br>}";
+    $answer .= "<br><br>public function __set(" . "$" . "property,\$value" . "){<br><br> &nbsp&nbsp&nbsp" . "$" . "this -> \$property = \$value;<br><br>}";
+    $general = 1;
+}
 
-                    $model .=  $line;
-                }
-                    return $model;
-            }
-           
-            $top = 0;  
-            $core="";  
-            $line="";
-            $general=0;
-            $type=1;
+if ($show_result == 101) { //php get
 
-            if ($show_result == 100) //php propertyes
-            {
-               $prefix = "private $";
-               $suffix ="; <br>";  
-               $answer = "<br>public function __get("."$"."property"."){<br><br> &nbsp&nbsp&nbsp   return "."$"."this ->"."$"."property;<br><br>}";
-               $answer .= "<br><br>public function __set("."$"."property,\$value"."){<br><br> &nbsp&nbsp&nbsp"."$"."this -> \$property = \$value;<br><br>}";
-               $general = 1;
+    $line = "$" . "panku_describe_field" . " = $" . "_GET[" . '\"' . "panku_describe_field" . '\"' . "]; <br>";
+}
 
-            }    
+if ($show_result == 102) { //php POST
 
-            if ($show_result == 101){ //php get
-            
-                $line = "$"."panku_describe_field"." = $"."_GET[".'\"'."panku_describe_field".'\"'."]; <br>";
-              
-            }   
+    $line = "$" . "panku_describe_field" . " = $" . "_POST[" . '\"' . "panku_describe_field" . '\"' . "]; <br>";
+}
 
-            if ($show_result == 102){ //php POST
-            
-                    $line = "$"."panku_describe_field"." = $"."_POST[".'\"'."panku_describe_field".'\"'."]; <br>";
+if ($show_result == 103) { //php __set
 
-            }
+    $line = "$" . "obj_$table_name -> __set(" . '\"' . "panku_describe_field" . '\",\"$' . "panku_describe_field" . '\")' . "; <br>";
+}
 
-            if ($show_result == 103){ //php __set
-            
-                    $line = "$"."obj_$table_name -> __set(".'\"'."panku_describe_field".'\",\"$'."panku_describe_field".'\")'."; <br>";
+if ($show_result == 104) { //php_set_properties
 
-                }
+    $line = "$" . "this -> " . "panku_describe_field" . "= " . "$" . "row[" . '\"' . "panku_describe_field" . '\"];<br>';
+}
 
-            if ($show_result == 104){ //php_set_properties
+if ($show_result == 105) { //php_properties_to_var
 
-                    $line = "$"."this -> "."panku_describe_field"."= "."$"."row[".'\"'."panku_describe_field".'\"];<br>';
+    $line = "$" . "panku_describe_field" . " = " . "$" . "this ->" . "panku_describe_field" . ";<br>";
+}
 
-                }
+if ($show_result == 106) { //mysql insert
 
-            if ($show_result == 105){ //php_properties_to_var
-            
-                    $line = "$"."panku_describe_field"." = "."$"."this ->"."panku_describe_field".";<br>";
+    $line = $table_name;
+    $type = 2;
+}
 
-            }   
+if ($show_result == 107) //mysql update
+{
 
-            if ($show_result == 106){ //mysql insert
-            
-                $line = $table_name;
-                $type = 2; 
-              
-            }   
+    $line = "$table_name,$key";
+    $type = -3;
+}
 
-            if ($show_result == 107) //mysql update
-            {
+if ($show_result == 108) //Magic Form
+{
 
-                $line = "$table_name,$key";
-                $type=3;
+    $nlines = $column_count / $answer;
+    $points = $column_count % $answer;
 
-            }   
+    $fr_lines = "";
+    $fr_cols = "";
 
-           
-            if ($show_result == 108) //Magic Form
-            {
+    for ($i = 0; $i < $answer; $i++) {
 
-                $nlines = $column_count / $answer;
-                $points = $column_count % $answer;
+        $fr_cols .= "1fr ";
+    }
 
-                
-                $fr_lines = "";
-                $fr_cols = "";
+    for ($i = 0; $i < $nlines; $i++) {
 
-                for ($i=0; $i<$answer; $i++){
+        $fr_lines .= "1fr ";
+    }
 
-                    $fr_cols .= "1fr ";
+    $line = $table_name;
 
-                }
+    $type = 4;
 
-                
-                for ($i=0; $i<$nlines; $i++){
+    $model = file_to_model('form_model.txt');
 
-                    $fr_lines .= "1fr ";
+    echo ("
 
-                }
-
-
-                $line = $table_name;
-
-                $type = 4;
-
-                $model = file_to_model('form_model.txt'); 
-
-                echo("
-               
-                <textarea rows=10 cols=30 id='memo_aux_html'>$model</textarea> 
-               
+                <textarea rows=10 cols=30 id='memo_aux_html'>$model</textarea>
 
                 <script>pass_html_model(\"$table_name\",\"$fr_cols\",\"$fr_lines\");</script>
-               
-               
+
               ");
+}
 
-            } 
-            
-            
+if ($show_result == 109) { //connect
 
-            if ($show_result == 109){ //connect
-                
-               $line = "see panku.js";
+    $line = "see panku.js";
 
-               $model = file_to_model('db_model.txt');               
-             
-                $type=5;
+    $model = file_to_model('db_model.txt');
 
-               echo("
+    $type = 5;
+
+    echo ("
                
                 <textarea rows=10 cols=30 id='memo_aux'>$model</textarea> 
 
                 <script>pass_db_model()</script>
                
               ");
+}
 
-             
-            }   
-            
-            
-            if ($show_result == 110) //window
-            {
+if ($show_result == 110) //window
+{
 
-                $window_name = $answer;
-                
+    $window_name = $answer;
 
-                $line = $table_name;
+    $line = $table_name;
 
-                $type = 6;
+    $type = 6;
 
-                $model = file_to_model('window_model.txt'); 
+    $model = file_to_model('window_model.txt');
 
-                echo("
+    echo ("
                
                 <textarea rows=10 cols=30 id='memo_aux_window'>$model</textarea> 
                
-
                 <script>pass_window_model(\"$table_name\",\"$window_name\");</script>
                
-               
               ");
+}
 
-            } 
+if ($show_result == 111) //index
+{
 
-           
-             
-            if ($show_result == 111) //index
-            {
+    $project_title = $answer;
 
-                $project_title = $answer;
-           
-                $line = $table_name;
+    $line = $table_name;
 
-                $type = 7;
+    $type = 7;
 
-                $model = file_to_model('index_model.txt'); 
+    $model = file_to_model('index_model.txt');
 
-                $model = str_replace('@window_title@',$project_title,$model);
+    $model = str_replace('@window_title@', $project_title, $model);
 
-                echo("
+    echo ("
                
-                <textarea rows=10 cols=30 id='memo_aux_index'>$model</textarea> 
+                <textarea rows=10 cols=30 id='memo_aux_index'>$model</textarea>
 
                 <script>pass_index_model(\"$table_name\",\"$project_title\");</script>
 
               ");
+}
 
-            } 
+if ($show_result == 113) { //php __obj_get
 
-            if ($show_result == 113){ //php __obj_get
-            
-                $line = "$"."panku_describe_field = $"."obj_$table_name -> __get(".'\"'."panku_describe_field".'\")'."; <br>";
+    $line = "$" . "panku_describe_field = $" . "obj_$table_name -> __get(" . '\"' . "panku_describe_field" . '\")' . "; <br>";
+}
 
-            }
+if ($show_result == 114) { //mysql structure
 
-            if ($show_result == 114){ //mysql structure
-                            
-                $type=8;
+    $type = 8;
 
-                $query = "describe agendas";
+    $query = "describe agendas";
 
-                $obj_dbtools = new DBtools();
+    $obj_dbtools = new DBtools();
 
-                $obj_dbtools -> getInformation($query,$db,$host,$port,$user,$password);
+    $obj_dbtools->getInformation($query, $db, $host, $port, $user, $password);
 
-                $line = $obj_dbtools -> getStructure();
+    $line = $obj_dbtools->getStructure();
 
-                $message = "Warning: This is a simple tool and don't have support to all table properties. Never use this how a Backup tool.";
+    $message = "Warning: This is a simple tool and don't have support to all table properties. Never use this how a Backup tool.";
 
-                echo("<script>window.parent.status(\"<font color='blue' class='font_m'>$message</font>\",1);</script>"); 
+    echo ("<script>window.parent.status(\"<font  class='font_m'>$message</font>\",1);</script>");
+}
 
-            }
+if ($show_result == 115) { //mysql data
 
-            if ($show_result == 115){ //mysql data
-                            
-                $type=9;               
+    $type = 9;
 
-                $obj_dbtools = new DBtools();
+    $obj_dbtools = new DBtools();
 
-                $obj_dbtools -> getInformation($query,$db,$host,$port,$user,$password);
+    $obj_dbtools->getInformation($query, $db, $host, $port, $user, $password);
 
-                $line = $obj_dbtools -> getData(); 
-               
-                $message = "Warning: This is a simple tool and don't have support to all table properties. Never use this how a Backup tool.";
+    $line = $obj_dbtools->getData();
 
-                echo("<script>window.parent.status(\"<font color='blue' class='font_m'>$message</font>\",1);</script>"); 
+    $message = "Warning: This is a simple tool and don't have support to all table properties. Never use this how a Backup tool.";
 
-            }
+    echo ("<script>window.parent.status(\"<font class='font_m'>$message</font>\",1);</script>");
+}
 
-            if ($general == 1)
-            {
-                for ($i=0;$i < $column_count;$i++)            
-                {
-                    
-                    $line = $prefix."panku_describe_field".$suffix;
+if ($general == 1) {
+    for ($i = 0; $i < $column_count; $i++) {
 
-                    $core .= $line;
+        $line = $prefix . "panku_describe_field" . $suffix;
 
-                    $top=$top+5;
+        $core .= $line;
 
-                }
+        $top = $top + 5;
+    }
+}
 
-                
-            }    
+echo ("<script>
 
-               
-
-           
-
-            echo("<script>
-
-                    
               //window.parent.document.getElementById('dv_grid').innerHTML = \"$core\";
               window.parent.php_tool(\"$line\",\"$type\",\"$answer\");
               
-
-                    
-                    
                 </script>");
-?>                
