@@ -12,7 +12,7 @@ include_once("panku.js");
 
 </head>
 
-<body>
+<body onload='horinzontal_adjust();add_query_accordion("Press F8 to run the query and add it here, or press F9.");'>
 
         <div id="dv_main" style="position:absolute; width:100%; height:100%;left:0%;top:0%; background-color:black">
 
@@ -74,7 +74,11 @@ include_once("panku.js");
                         </div>
 
                         //the editor with the querys
-                        <div id="dv_memo" onKeyUp="f9()" contentEditable="plaintext-only" style="position:absolute; overflow:auto; width:100%; padding:1%; height:40%;left:0%;top:4%; background-color:white">
+                        <div id="dv_memo" onKeyUp="f9()" contentEditable="plaintext-only" style="position:absolute; overflow:auto; width:80%; padding:1%; height:40%;left:0%;top:4%; background-color:#DCDCDC">
+
+                        </div>
+
+                        <div id="accordion" style="position: absolute; background-color:#DCDCDC; width: 20%; left: 80%; top: 4%; border: 1px solid white; overflow:auto; padding: 0%;">
 
                         </div>
 

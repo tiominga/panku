@@ -353,6 +353,13 @@
 
           }
 
+          if(event.keyCode == 119){ //f10
+
+            query_exec();
+            add_query_accordion('');
+
+          }
+
         }
 
         function enable_back(){
@@ -434,6 +441,8 @@
         function editor_pass(sql_command,exec,ret,describe_need,question){
 
                 var answer = '';
+
+                sql_command = sql_command.replaceAll('\`',"'");
 
                 var memo = document.getElementById('dv_memo').innerText;
 
@@ -772,6 +781,59 @@
 
         }
 
+        function destroy_accordion(id){
+
+          event.stopPropagation();
+
+          var element = document.getElementById(id);
+          element.style.display='none';
+
+        }
+
+        function add_query_accordion(text){
+
+           if (text.length === 0){
+
+            text = document.getElementById('dv_memo').innerText;
+
+           }
+
+           text = text.replaceAll('"',"\`");
+           text = text.replaceAll("'","\`");
+
+           var panelCounter = arr_memos.length;
+
+            var accordion = document.getElementById('accordion');
+
+            var id_accordion = 'heading'+panelCounter;
+
+            var newPanel = document.createElement('div');
+            newPanel.className = 'card';
+
+            newPanel.innerHTML = `
+              <div class="card-header" style="background-color:#DCDCDC;color:black;" onclick="editor_pass('${text}',1,0,0,0);" id='${id_accordion}'>
+                <h5 class="mb-0">
+                  <button class="btn btn-link" style="color: black;" data-toggle="collapse" data-target="#collapse${panelCounter}" aria-expanded="false" aria-controls="collapse${panelCounter}">
+                    ${text}
+                  </button>
+                </h5>
+                <div class="d-grid gap-2 col-12 mx-auto">
+                  <button onclick=destroy_accordion('${id_accordion}'); type="button" class="btn btn-dark ">Close</button>
+                </div>
+              </div>
+
+              <div id="collapse${panelCounter}" class="d-none collapse" aria-labelledby='${id_accordion}' data-parent="#accordion">
+                <div class="card-body">
+                  Panel ${panelCounter}
+                </div>
+              </div>
+            `;
+
+            accordion.appendChild(newPanel);
+            panelCounter++;
+
+        }
+
         function history_show(){
 
           if (document.getElementById('dv_history').style.display=='none'){
@@ -823,6 +885,8 @@
 
           //memo height
           document.getElementById('dv_memo').style.height = 100 - 1 - grid_height + '%';
+
+          document.getElementById('accordion').style.height = 100 - 5 - grid_height + '%';
 
         }
 
