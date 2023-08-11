@@ -353,7 +353,7 @@
 
           }
 
-          if(event.keyCode == 119){ //f10
+          if(event.keyCode == 119){ //f8
 
             query_exec();
             add_query_accordion('');
@@ -363,8 +363,6 @@
         }
 
         function enable_back(){
-
-          alert(pointer);
 
           segur_left = window.parent.document.getElementById('dv_table').innerHTML;
           window.parent.document.getElementById('dv_back_tool').style.display = 'block';
@@ -800,8 +798,15 @@
 
            text = text.replaceAll('"',"\`");
            text = text.replaceAll("'","\`");
+           text = text.replace(/\s+/g, ' ').trim();
 
-           var panelCounter = arr_memos.length;
+           var text_80 = text;
+
+           if (text.length > 80){
+           var text_80 = text.slice(0,80)+'...';
+           }
+
+           var panelCounter = arr_memos.length+1;
 
             var accordion = document.getElementById('accordion');
 
@@ -814,7 +819,7 @@
               <div class="card-header" style="background-color:#DCDCDC;color:black;" onclick="editor_pass('${text}',1,0,0,0);" id='${id_accordion}'>
                 <h5 class="mb-0">
                   <button class="btn btn-link" style="color: black;" data-toggle="collapse" data-target="#collapse${panelCounter}" aria-expanded="false" aria-controls="collapse${panelCounter}">
-                    ${text}
+                    ${text_80}
                   </button>
                 </h5>
                 <div class="d-grid gap-2 col-12 mx-auto">
@@ -824,7 +829,7 @@
 
               <div id="collapse${panelCounter}" class="d-none collapse" aria-labelledby='${id_accordion}' data-parent="#accordion">
                 <div class="card-body">
-                  Panel ${panelCounter}
+                  <textarea class="form-control h-100">${text}</textarea>
                 </div>
               </div>
             `;

@@ -80,6 +80,8 @@ if ($error != 0) {
     } else //its a new connection becouse show_result is zero
     {
 
-        include_once("new_connection.php");
+        if (strpos($query, 'update') === false) {
+            include_once("new_connection.php");
+        }
     }
 }//else of error

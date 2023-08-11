@@ -75,7 +75,6 @@ var storedSelections = [];
                     storedSelections.push (currSelection.getRangeAt (i));
                 }
                 currSelection.removeAllRanges ();
-                alert('guardei2');
             } else {
                 alert ("Your browser does not support this example!");
             }
@@ -286,8 +285,7 @@ function book_cria(linha)
 			 	
 			 	if (retorno[0]==indexador && retorno[2]==linha) 
 			 	{
-					
-				alert('achei');
+				
 				arr_book[i]="0";
 
 	 	      }
